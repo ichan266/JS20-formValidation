@@ -24,33 +24,54 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+// Check required fileds
+function checkRequired(inputArr) {
+    inputArr.forEach(function(input) {
+        if (input.value.trim() ==='') {
+            console.log(input.id);
+            showError(input, `${getFieldName(input)} is required`);
+        } else {
+            showSuccess(input);
+        }
+        console.log(input.value);
+    });
+}
+
+// Get fieldname
+function getFieldName(input) {
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
+
 // Event Listeners
 form.addEventListener('submit', function(evt) {
     evt.preventDefault();
     
-    if (username.value === '') {
-        showError(username, 'Username is required');
-    } else {
-        showSuccess(username);
-    }
+    checkRequired([username, email, password, password2]);
+
+    //* Used for first try
+    // if (username.value === '') {
+    //     showError(username, 'Username is required');
+    // } else {
+    //     showSuccess(username);
+    // }
     
-    if (email.value === '') {
-        showError(email, 'Email is required');
-    } else if (!isValidEmail(email.value)) {
-        showError(email, 'Email is not Valid');
-    } else {
-        showSuccess(email);
-    }
+    // if (email.value === '') {
+    //     showError(email, 'Email is required');
+    // } else if (!isValidEmail(email.value)) {
+    //     showError(email, 'Email is not Valid');
+    // } else {
+    //     showSuccess(email);
+    // }
     
-    if (password.value === '') {
-        showError(password, 'Password is required');
-    } else {
-        showSuccess(username);
-    }
+    // if (password.value === '') {
+    //     showError(password, 'Password is required');
+    // } else {
+    //     showSuccess(username);
+    // }
     
-    if (password2.value === '') {
-        showError(password2, 'Please confirm your password');
-    } else {
-        showSuccess(username);
-    }
+    // if (password2.value === '') {
+    //     showError(password2, 'Please confirm your password');
+    // } else {
+    //     showSuccess(username);
+    // }
 });
